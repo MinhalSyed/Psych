@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Test
+  </title>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery-ui.min.js"></script>
+  <script src="scripts/angular.min.js"></script>
+
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+  <script src="scripts/main.js"></script>
+  <style>
+  h1{
+    text-align:center;
+  }
+
+  .wrapper {
+    font: normal normal normal 14px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;
+    width: 1106px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    min-height:1500px;
+    padding: 10px;
+  }
+
+  .imgContainer {
+    padding: 10px;
+    width: 248px;
+    float:left;
+  }
+  .BodyText {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    float: left;
+  }
+
+  .center
+  {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  h1 {
+    margin:0px;
+  }
+
+  #outerContainer
+  {
+    position:relative;
+  }
+  #innerContainer
+  {
+    position:absolute; top:50%; height:10em; margin-top:0em;
+  }
+
+  </style>
+
+  <script type="text/javascript">
+  if (jQuery && jQuery) {
+    $j = jQuery;
+  }
+  </script>
+</head>
+<body ng-app="main">
+<div ng-controller="mainController">
+  <input ng-click="start()" class="btn btn-default" type="button" value="Begin"/>
+  <div class="center" style="width:400px;">
+    <p class="lead">
+      Q. {{current_question.question_stem}}
+    </p>
+    <img ng-src="{{current_question.image}}" style="max-width:250px;"/>
+    <br/>
+    <input ng-click="click()" class="btn btn-default" type="button" value="{{current_question.correct_response}}"/>
+    <input class="btn btn-default" type="button" value="{{current_question.incorrect_response}}"/>
+  </div>
+
+</div>
+
+</div>
+</div>
+</body>
+
+</html>
