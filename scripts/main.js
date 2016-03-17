@@ -33,8 +33,22 @@ angular.module('main',[])
 
   $scope.times = [];
 
+  $scope.correct = [];
+
   $scope.quizStart = false;
   $scope.quizComplete = false;
+
+  $scope.wrongClick = function()
+  {
+    $scope.correct.push(false);
+    $scope.click();
+  }
+
+  $scope.rightClick = function()
+  {
+    $scope.correct.push(true);
+    $scope.click();
+  }
 
   $scope.click = function()
   {

@@ -21,6 +21,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -57,10 +59,10 @@
               <p class="lead">
                 Q{{current_index + 1}}. {{current_question.question_stem}}
               </p>
-              <a ng-click="click()" class="btn btn-default" type="button">
+              <a ng-click="rightClick()" class="btn btn-default" type="button">
                 <div ng-bind-html="current_question.correct_response | to_trusted"></div>
               </a>
-              <a ng-click="click()" class="btn btn-default" type="button">
+              <a ng-click="wrongClick()" class="btn btn-default" type="button">
                 <div ng-bind-html="current_question.incorrect_response | to_trusted"></div>
               </a>
               <br/>
@@ -91,7 +93,8 @@
                     {{$index + 1}}
                   </td>
                   <th>
-                    NO
+                    <i ng-if="correct[$index]" class="fa fa-check" style="color:green;"></i>
+                    <i ng-if="!correct[$index]" class="fa fa-times" style="color:red;"></i>
                   </th>
                   <td>
                     {{t}}
