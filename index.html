@@ -29,6 +29,7 @@
     h1 {
       text-align: center;
     }
+
     .center {
       margin-left: auto;
       margin-right: auto;
@@ -46,43 +47,59 @@
   <div class="container">
     <div class="content">
       <div ng-controller="mainController">
-        <input ng-click="start()" class="btn btn-default" type="button" value="Begin" />
-        <div ng-hide="quizComplete">
-          <p class="lead">
-            Q{{current_index + 1}}. {{current_question.question_stem}}
-          </p>
-          <img ng-src="{{current_question.image}}" style="max-width:250px;" />
-          <br/>
-          <input ng-click="click()" class="btn btn-default" type="button" value="{{current_question.correct_response}}" />
-          <input ng-click="click()" class="btn btn-default" type="button" value="{{current_question.incorrect_response}}" />
+        <input ng-show="!quizStart" ng-click="start()" class="btn btn-default" type="button" value="Begin" />
+        <div ng-show="quizStart && !quizComplete">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Answer the following questions:</h3>
+            </div>
+            <div class="panel-body">
+              <p class="lead">
+                Q{{current_index + 1}}. {{current_question.question_stem}}
+              </p>
+              <a ng-click="click()" class="btn btn-default" type="button">
+                <div ng-bind-html="current_question.correct_response | to_trusted"></div>
+              </a>
+              <a ng-click="click()" class="btn btn-default" type="button">
+                <div ng-bind-html="current_question.incorrect_response | to_trusted"></div>
+              </a>
+              <br/>
+              <img ng-src="{{current_question.image}}" style="max-width:250px;" />
+            </div>
+          </div>
         </div>
-
         <div ng-show="quizComplete">
-          RESULTS:
-          <table class="table">
-            <tr>
-              <th>
-                Question Number
-              </th>
-              <th>
-                Correct
-              </th>
-              <th>
-                Time(ms)
-              </th>
-            </tr>
-            <tr ng-repeat="t in times">
-              <td>
-                {{$index + 1}}
-              </td>
-              <th>
-                NO
-              </th>
-              <td>
-                {{t}}
-              </td>
-            </tr>
-          </table>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">RESULTS:</h3>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                <tr>
+                  <th>
+                    Question Number
+                  </th>
+                  <th>
+                    Correct
+                  </th>
+                  <th>
+                    Time(ms)
+                  </th>
+                </tr>
+                <tr ng-repeat="t in times">
+                  <td>
+                    {{$index + 1}}
+                  </td>
+                  <th>
+                    NO
+                  </th>
+                  <td>
+                    {{t}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

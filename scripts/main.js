@@ -1,10 +1,15 @@
 angular.module('main',[])
+.filter('to_trusted', ['$sce', function($sce){
+    return function(text) {
+        return $sce.trustAsHtml(text);
+    };
+}])
 .controller('mainController',['$scope', '$http', function($scope, $http){
 
   $scope.questions = [
     {"question_stem":"What is this?",
     "image":"img/cabin.png",
-    "correct_response":"Cabin",
+    "correct_response":"&#21488;&#21271;",
     "incorrect_response":"Panda"},
     {"question_stem":"What is this?",
       "image":"img/cake.png",
@@ -13,7 +18,7 @@ angular.module('main',[])
     {"question_stem":"What is this?",
       "image":"img/game.png",
       "correct_response":"Controller",
-      "incorrect_response":"Banana"},
+      "incorrect_response":"&#22823;&#23478;&#22909;"},
     {"question_stem":"What is this?",
       "image":"img/tree.jpg",
       "correct_response":"Tree",
@@ -28,36 +33,41 @@ angular.module('main',[])
 
   $scope.times = [];
 
+  $scope.quizStart = false;
   $scope.quizComplete = false;
 
   $scope.click = function()
   {
-    $scope.$broadcast('btnPressed', {});
-
     $scope.timer_stop = new Date().getTime();
 
     var time_elapsed = $scope.timer_stop - $scope.timer_start;
     console.log(time_elapsed);
 
     $scope.times.push(time_elapsed);
-    $scope.timer_start = new Date().getTime();
+
+    if($scope.current_index < $scope.questions.length -1 )
+    {
+      $scope.current_index +=1;
+      $scope.current_question = $scope.questions[$scope.current_index];
+      $scope.timer_start = new Date().getTime();
+    }
+    else
+    {
+      $scope.quizComplete = true;
+    }
+
+
+
   }
 
   $scope.$on('btnPressed', function () {
-      if($scope.current_index < $scope.questions.length -1 )
-      {
-        $scope.current_index +=1;
-        $scope.current_question = $scope.questions[$scope.current_index];
-      }
-      else
-      {
-        $scope.quizComplete = true;
-      }
+
   });
 
   $scope.start = function()
   {
     $scope.timer_start = new Date().getTime();
+    $scope.quizStart = true;
   }
 
 }]);
