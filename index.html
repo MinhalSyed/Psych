@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>
-    Test
+    Quiz
   </title>
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/jquery-ui.min.js"></script>
@@ -22,77 +23,70 @@
 
   <script src="scripts/main.js"></script>
   <style>
-  h1{
-    text-align:center;
-  }
-
-  .wrapper {
-    font: normal normal normal 14px/1.4em helvetica-w01-light,helvetica-w02-light,sans-serif;
-    width: 1106px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
-    min-height:1500px;
-    padding: 10px;
-  }
-
-  .imgContainer {
-    padding: 10px;
-    width: 248px;
-    float:left;
-  }
-  .BodyText {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 10px;
-    float: left;
-  }
-
-  .center
-  {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-
-  h1 {
-    margin:0px;
-  }
-
-  #outerContainer
-  {
-    position:relative;
-  }
-  #innerContainer
-  {
-    position:absolute; top:50%; height:10em; margin-top:0em;
-  }
-
+    h1 {
+      text-align: center;
+    }
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
 
   <script type="text/javascript">
-  if (jQuery && jQuery) {
-    $j = jQuery;
-  }
+    if (jQuery && jQuery) {
+      $j = jQuery;
+    }
   </script>
 </head>
+
 <body ng-app="main">
-<div ng-controller="mainController">
-  <input ng-click="start()" class="btn btn-default" type="button" value="Begin"/>
-  <div class="center" style="width:400px;">
-    <p class="lead">
-      Q. {{current_question.question_stem}}
-    </p>
-    <img ng-src="{{current_question.image}}" style="max-width:250px;"/>
-    <br/>
-    <input ng-click="click()" class="btn btn-default" type="button" value="{{current_question.correct_response}}"/>
-    <input class="btn btn-default" type="button" value="{{current_question.incorrect_response}}"/>
+  <div class="container">
+    <div class="content">
+      <div ng-controller="mainController">
+        <input ng-click="start()" class="btn btn-default" type="button" value="Begin" />
+        <div ng-hide="quizComplete">
+          <p class="lead">
+            Q{{current_index + 1}}. {{current_question.question_stem}}
+          </p>
+          <img ng-src="{{current_question.image}}" style="max-width:250px;" />
+          <br/>
+          <input ng-click="click()" class="btn btn-default" type="button" value="{{current_question.correct_response}}" />
+          <input ng-click="click()" class="btn btn-default" type="button" value="{{current_question.incorrect_response}}" />
+        </div>
+
+        <div ng-show="quizComplete">
+          RESULTS:
+          <table class="table">
+            <tr>
+              <th>
+                Question Number
+              </th>
+              <th>
+                Correct
+              </th>
+              <th>
+                Time(ms)
+              </th>
+            </tr>
+            <tr ng-repeat="t in times">
+              <td>
+                {{$index + 1}}
+              </td>
+              <th>
+                NO
+              </th>
+              <td>
+                {{t}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-
-</div>
-
-</div>
-</div>
+  </div>
+  </div>
 </body>
+
 
 </html>

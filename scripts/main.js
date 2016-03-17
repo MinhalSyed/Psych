@@ -2,22 +2,22 @@ angular.module('main',[])
 .controller('mainController',['$scope', '$http', function($scope, $http){
 
   $scope.questions = [
-    {"question_stem":"This is a question.",
+    {"question_stem":"What is this?",
     "image":"img/cabin.png",
-    "correct_response":"Correct",
-    "incorrect_response":"Incorrect"},
-    {"question_stem":"This is another question.",
-      "image":"img/art.jpg",
-      "correct_response":"Correct",
-      "incorrect_response":"Incorrect"},
-    {"question_stem":"This is another question.",
+    "correct_response":"Cabin",
+    "incorrect_response":"Panda"},
+    {"question_stem":"What is this?",
+      "image":"img/cake.png",
+      "correct_response":"Cake",
+      "incorrect_response":"Human"},
+    {"question_stem":"What is this?",
       "image":"img/game.png",
-      "correct_response":"Correct",
-      "incorrect_response":"Incorrect"},
-    {"question_stem":"This is another question.",
+      "correct_response":"Controller",
+      "incorrect_response":"Banana"},
+    {"question_stem":"What is this?",
       "image":"img/tree.jpg",
-      "correct_response":"Correct",
-      "incorrect_response":"Incorrect"}
+      "correct_response":"Tree",
+      "incorrect_response":"Hello"}
   ];
 
   $scope.current_index = 0;
@@ -27,6 +27,8 @@ angular.module('main',[])
   $scope.timer_stop = 0;
 
   $scope.times = [];
+
+  $scope.quizComplete = false;
 
   $scope.click = function()
   {
@@ -46,6 +48,10 @@ angular.module('main',[])
       {
         $scope.current_index +=1;
         $scope.current_question = $scope.questions[$scope.current_index];
+      }
+      else
+      {
+        $scope.quizComplete = true;
       }
   });
 
