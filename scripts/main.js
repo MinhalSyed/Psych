@@ -1,17 +1,32 @@
 angular.module('main',[])
 .controller('mainController',['$scope', '$http', function($scope, $http){
 
-  $scope.questions = [];
+  $scope.questions = [
+    {"question_stem":"This is a question.",
+    "image":"../img/cabin.png",
+    "correct_response":"Correct",
+    "incorrect_response":"Incorrect"},
+    {"question_stem":"This is another question.",
+      "image":"../img/art.jpg",
+      "correct_response":"Correct",
+      "incorrect_response":"Incorrect"},
+    {"question_stem":"This is another question.",
+      "image":"../img/game.png",
+      "correct_response":"Correct",
+      "incorrect_response":"Incorrect"},
+    {"question_stem":"This is another question.",
+      "image":"../img/tree.jpg",
+      "correct_response":"Correct",
+      "incorrect_response":"Incorrect"}
+  ];
 
   $scope.current_index = 0;
-  $scope.current_question = {};
+  $scope.current_question = $scope.questions[$scope.current_index];
 
   $scope.timer_start = 0;
   $scope.timer_stop = 0;
 
   $scope.times = [];
-
-
 
   $scope.click = function()
   {
@@ -26,12 +41,18 @@ angular.module('main',[])
     $scope.timer_start = new Date().getTime();
   }
 
-  $http.get('../questions.json').success(function (json) {
-    for (var i = 0; i < json.length; i++) {
-        var question = json[i];
-        $scope.questions.push(question);
-    }
-    $scope.current_question = $scope.questions[$scope.current_index];
+  $http.jsonp('../questions.js')
+    .success(function(data){
+        console.log(data.found);
+    });
+
+  $http.get('../questions.js').success(function (json) {
+    //console.log(json);
+    //for (var i = 0; i < json.length; i++) {
+    //    var question = json[i];
+  //      $scope.questions.push(question);
+  //  }
+    //$scope.current_question = $scope.questions[$scope.current_index];
   });
 
 
